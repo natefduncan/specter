@@ -5,8 +5,6 @@ load_dotenv()
 
 HOST=os.getenv("HOST")
 REPO=os.getenv("REPO")
-SUPERUSER=os.getenv("SUPERUSER")
-SUPERUSER_PASSWORD=os.getenv("SUPERUSER_PASSWORD")
 USERNAME=os.getenv("USERNAME")
 PASSWORD=os.getenv("PASSWORD")
 
@@ -20,6 +18,9 @@ def get_id_rsa():
     return content
 
 def run_user_setup():
+    super_user = input("Type in ssh user: ")
+    password = input(f"Type in {super_user}@{HOST} ssh password:")
+    
     ssh_pub_file = get_id_rsa()
     command = f"""
     #Create user
@@ -39,9 +40,9 @@ def run_user_setup():
     exit
     """
 
-    result = Connection(f'{SUPERUSER}:{SUPERUSER_PASSWORD}@{HOST}').run(command, hide=True)
+    result = Connection(f'{super_user}:{password}@{HOST}').run(command, hide=True)
     msg = "Ran {0.command!r} on {0.connection.host}, got stdout:\n{0.stdout}"
     return msg.format(result)
 
 if __name__=="__main__":
-    get_id_rsa()
+    print(get_id_rsa())
