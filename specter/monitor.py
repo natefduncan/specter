@@ -82,10 +82,10 @@ class DirLoop:
                     if self.open_func:
                         print("Triggering open function.")
                         self.trigger_open()
-                
                 if len(opened) > 0 or len(saved) > 0:
                     dump_saves(files)
                     SAVES = load_saves()
+                    print(SAVES)
                 time.sleep(self.wait)
             except KeyboardInterrupt:
                 break    
@@ -97,7 +97,7 @@ if __name__=="__main__":
     home_dir = Path(os.path.expanduser('~'))
     dir_path = f"{str(home_dir)}/Documents/Notes"
 
-    l = DirLoop(path=dir_path)
+    l = DirLoop(path=dir_path, wait=5)
     l.set_save_func(notify, x="SAVED")
     l.set_open_func(notify, x="OPENED")
     l.start()

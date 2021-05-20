@@ -5,8 +5,8 @@ load_dotenv()
 
 HOST=os.getenv("HOST")
 REPO=os.getenv("REPO")
-USERNAME=os.getenv("USERNAME")
-PASSWORD=os.getenv("PASSWORD")
+USERNAME=os.getenv("SSH_USERNAME")
+PASSWORD=os.getenv("SSH_PASSWORD")
 
 from fabric import Connection
 
@@ -40,9 +40,21 @@ def run_user_setup():
     exit
     """
 
-    result = Connection(f'{super_user}:{password}@{HOST}').run(command, hide=True)
+    result = Connection(f'{super_user}@{HOST}').run(command, hide=True)
     msg = "Ran {0.command!r} on {0.connection.host}, got stdout:\n{0.stdout}"
     return msg.format(result)
+
+def add_key():
+    ssh_pub_file = get_id_rsa()
+    command = f"""
+    echo \"{ssh_pub_file}\" > ~/.ssh/authorized_keys \n\
+    exit
+    """
+    print(command)
+    result = Connection(f'{USERNAME}@{HOST}', connect_kwargs={"password" : PASSWORD}).run(command, hide=False)
+    msg = "Ran {0.command!r} on {0.connection.host}, got stdout:\n{0.stdout}"
+    return msg.format(result)
+
 
 if __name__=="__main__":
     print(get_id_rsa())
