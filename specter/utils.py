@@ -9,4 +9,11 @@ def get_all_files(path, ignore=[]):
                 output.append(path)
     return output
 
+def file_to_words(path):
+    with open(path) as f:
+        content = f.read()
+    return content.split()
+    
+
+
 
