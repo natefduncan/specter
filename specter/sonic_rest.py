@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, request
-from sonic_utils import search, parse_search
+from specter.sonic_utils import search, parse_search
 
 app = Flask(__name__)
 

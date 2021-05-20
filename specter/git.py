@@ -1,15 +1,16 @@
 import os
 from dulwich import porcelain
+from dulwich.repo import Repo
 from pathlib import Path
-from utils import get_all_files
+from specter.utils import get_all_files
 
 from dotenv import load_dotenv
 load_dotenv()
 
 HOST=os.getenv("HOST")
 REPO=os.getenv("REPO")
-USERNAME=os.getenv("USERNAME")
-PASSWORD=os.getenv("PASSWORD")
+USERNAME=os.getenv("SSH_USERNAME")
+PASSWORD=os.getenv("SSH_PASSWORD")
 
 def create_new_repo(path): 
     repo = porcelain.init(path)
@@ -19,7 +20,7 @@ def clone_repo(url, path):
     porcelain.clone(url, path)
 
 def get_repo(path):
-    repo = porcelain.init(path)
+    repo = Repo(path)
     return repo
 
 def commit(repo, files):
@@ -35,7 +36,6 @@ def pull(repo):
 
 if __name__=="__main__":
     home_dir = Path(os.path.expanduser('~'))
-    files = get_all_files(f"{str(home_dir)}/Documents/Notes", ignore=[".DS_Store", "/data", "/.git", "sonic.cfg"])
     repo = get_repo(f"{str(home_dir)}/Documents/Notes")
     relative_files = ["." + file.replace(repo.path, "") for file in files]
     commit(repo, files)

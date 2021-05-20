@@ -4,7 +4,7 @@ import datetime
 import json
 import time
 
-from utils import get_all_files
+from specter.utils import get_all_files
 
 def load_saves():
     with open("saves.json") as f:
@@ -75,10 +75,12 @@ class DirLoop:
                 #SAVED
                 if len(saved) > 0:
                     if self.save_func:
+                        print("Triggering save function.")
                         self.trigger_save()
                 #OPENED
                 if len(opened) > 0:
                     if self.open_func:
+                        print("Triggering open function.")
                         self.trigger_open()
                 
                 if len(opened) > 0 or len(saved) > 0:

@@ -3,7 +3,7 @@ from pathlib import Path
 
 from sonic import SearchClient
 from sonic import IngestClient
-from utils import file_to_words, get_all_files
+from specter.utils import file_to_words, get_all_files
 
 def clean_file(file):
     return file.replace(" ", "<space>")
