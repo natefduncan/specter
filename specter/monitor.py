@@ -4,12 +4,7 @@ import datetime
 import json
 import time
 
-from specter.utils import get_all_files
-
-def load_saves():
-    with open("saves.json") as f:
-        SAVES = json.load(f)
-    return SAVES
+from specter.utils import get_all_files, load_saves
 
 def get_last_modified(path):
     ts = os.path.getmtime(path)
@@ -39,7 +34,7 @@ def opened_files(files, SAVES):
     return output   
 
 def dump_saves(files):
-    with open("saves.json", "w") as f:
+    with open("data.json", "w") as f:
         json.dump({"last_checked" : datetime.datetime.now().timestamp(), "files" : files}, f)
 
 class DirLoop:

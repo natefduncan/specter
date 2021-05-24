@@ -11,6 +11,12 @@ import click
 def cli():
     pass
 
+@click.group()
+def init():
+    HOST = input("Type in server IP: ")
+    REPO = input("Type in the repository name (main.git): ")
+    LOCATION = input("Type in notes folder location relative to home (/Documents/Notes): ")
+
 @click.command()
 @click.argument("notes_path", help="file path to notes repository")
 def push(notes_path):

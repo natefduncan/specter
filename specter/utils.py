@@ -1,4 +1,11 @@
 import os
+import json
+
+def load_saves():
+    with open("data.json") as f:
+        SAVES = json.load(f)
+    return SAVES
+
 
 def get_all_files(path, ignore=[]):
     output = []
