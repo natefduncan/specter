@@ -34,8 +34,11 @@ def opened_files(files, SAVES):
     return output   
 
 def dump_saves(files):
+    SAVES = load_saves()
+    SAVES["last_checked"] = datetime.datetime.now().timestamp()
+    SAVES["files"] = files
     with open("data.json", "w") as f:
-        json.dump({"last_checked" : datetime.datetime.now().timestamp(), "files" : files}, f)
+        json.dump(SAVES, f)
 
 class DirLoop:
 
