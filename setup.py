@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='specter',
+    name='spekter',
     version='0.1.0',
     packages=find_packages(), 
     include_package_data=True, 
@@ -10,7 +10,7 @@ setup(
     ],
     entry_points={
         'console_scripts': [
-            'specter = specter.main:cli',
+            'spekter = spekter.main:cli',
         ],
     },
 )

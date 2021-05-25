@@ -3,26 +3,26 @@ from pathlib import Path
 
 from sonic import SearchClient
 from sonic import IngestClient
-from specter.utils import file_to_words, get_all_files
+from spekter.utils import file_to_words, get_all_files
 
 def clean_file(file):
     return file.replace(" ", "<space>")
 
 def injest(files):
     with IngestClient("127.0.0.1", 1491, "SecretPassword") as ingestcl:
-        ingestcl.flush("files", "specter")
+        ingestcl.flush("files", "spekter")
         for file in files:
             words = file_to_words(file)
             for idx, word in enumerate(words):
                 try:
-                    ingestcl.push("files", "specter", f'{clean_file(file)}:{str(idx)}', word)
+                    ingestcl.push("files", "spekter", f'{clean_file(file)}:{str(idx)}', word)
                 except Exception as e:
                     print(f"Failed to push: {file}:{str(idx)} -> {word}")
                     print(e)
 
 def search(query):
     with SearchClient("127.0.0.1", 1491, "SecretPassword") as querycl:
-        return querycl.query("files", "specter", query)
+        return querycl.query("files", "spekter", query)
 
 def parse_search(results, before=7, after=7):
     output = []

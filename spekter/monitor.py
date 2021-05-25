@@ -4,7 +4,7 @@ import datetime
 import json
 import time
 
-from specter.utils import get_all_files, load_saves
+from spekter.utils import get_all_files, load_saves
 
 def get_last_modified(path):
     ts = os.path.getmtime(path)

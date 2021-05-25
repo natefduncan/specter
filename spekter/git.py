@@ -2,7 +2,7 @@ import os
 from dulwich import porcelain
 from dulwich.repo import Repo
 from pathlib import Path
-from specter.utils import get_all_files, load_saves
+from spekter.utils import get_all_files, load_saves
 
 from dotenv import load_dotenv
 load_dotenv()
@@ -11,7 +11,7 @@ SAVES = load_saves()
 
 HOST=SAVES.get("host")
 REPO=SAVES.get("repo")
-USERNAME="specter"
+USERNAME="spekter"
 
 def create_new_repo(path): 
     repo = porcelain.init(path)

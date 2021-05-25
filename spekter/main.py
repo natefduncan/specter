@@ -1,9 +1,9 @@
 import os
-from specter.monitor import DirLoop
+from spekter.monitor import DirLoop
 from pathlib import Path
-from specter.git import push as git_push, pull as git_pull, commit, get_repo, commit_and_push
-from specter.utils import get_all_files, relative_to_absolute, get_notes_path, load_saves
-from specter.monitor import dump_saves
+from spekter.git import push as git_push, pull as git_pull, commit, get_repo, commit_and_push
+from spekter.utils import get_all_files, relative_to_absolute, get_notes_path, load_saves
+from spekter.monitor import dump_saves
 import sys
 import datetime
 import click
@@ -30,14 +30,14 @@ def init():
 @click.command()
 def push():
     commit_and_push()
-    click.echo('Pushing specter changes')
+    click.echo('Pushing spekter changes')
 
 @click.command()
 def pull():
     notes_path = get_notes_path()
     repo = get_repo(notes_path)
     git_pull(repo)
-    click.echo('Pulling specter changes')
+    click.echo('Pulling spekter changes')
 
 @click.command()
 def listen():
