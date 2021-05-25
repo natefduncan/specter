@@ -2,7 +2,7 @@ import os
 from dulwich import porcelain
 from dulwich.repo import Repo
 from pathlib import Path
-from spekter.utils import get_all_files, load_saves
+from spekter.utils import get_all_files, load_saves, get_notes_path
 
 from dotenv import load_dotenv
 load_dotenv()
@@ -34,7 +34,7 @@ def commit_and_push():
     files = get_all_files(notes_path, ignore=[".DS_Store", "/data", "/.git", "sonic.cfg", "\\.git", "\\data"])
     repo = get_repo(notes_path)
     commit(repo, files)
-    git_push(repo)
+    push(repo)
 
 def push(repo):
     r = porcelain.push(repo.path, f"{USERNAME}@{HOST}:{REPO}", "master")
