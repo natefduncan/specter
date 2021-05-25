@@ -3,6 +3,8 @@ from pathlib import Path
 from dotenv import load_dotenv
 load_dotenv()
 
+SAVES = load_saves()
+
 HOST=os.getenv("HOST")
 REPO=os.getenv("REPO")
 USERNAME=os.getenv("SSH_USERNAME")
@@ -57,4 +59,4 @@ def add_key():
 
 
 if __name__=="__main__":
-    print(get_id_rsa())
+    run_user_setup()
