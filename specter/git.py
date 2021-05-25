@@ -29,6 +29,13 @@ def commit(repo, files):
         porcelain.add(repo, files)
         porcelain.commit(repo, b"Automated commit")
 
+def commit_and_push():
+    notes_path = get_notes_path()
+    files = get_all_files(notes_path, ignore=[".DS_Store", "/data", "/.git", "sonic.cfg", "\\.git", "\\data"])
+    repo = get_repo(notes_path)
+    commit(repo, files)
+    git_push(repo)
+
 def push(repo):
     r = porcelain.push(repo.path, f"{USERNAME}@{HOST}:{REPO}", "master")
 

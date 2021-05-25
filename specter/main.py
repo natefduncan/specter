@@ -1,7 +1,7 @@
 import os
 from specter.monitor import DirLoop
 from pathlib import Path
-from specter.git import push as git_push, pull as git_pull, commit, get_repo
+from specter.git import push as git_push, pull as git_pull, commit, get_repo, commit_and_push
 from specter.utils import get_all_files, relative_to_absolute, get_notes_path, load_saves
 from specter.monitor import dump_saves
 import sys
@@ -29,11 +29,7 @@ def init():
 
 @click.command()
 def push():
-    notes_path = get_notes_path()
-    files = get_all_files(notes_path, ignore=[".DS_Store", "/data", "/.git", "sonic.cfg", "\\.git", "\\data"])
-    repo = get_repo(notes_path)
-    commit(repo, files)
-    git_push(repo)
+    commit_and_push()
     click.echo('Pushing specter changes')
 
 @click.command()
@@ -52,7 +48,7 @@ def listen():
 
     l = DirLoop(path=notes_path)
     repo = get_repo(notes_path)
-    l.set_save_func(git_push, repo)
+    l.set_save_func(commit_and_push)
     l.set_open_func(notify, "OPEN")
     l.start()
 
