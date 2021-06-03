@@ -13,7 +13,9 @@ def relative_to_absolute(relative):
 
 def load_saves():
     try:
-        with open("data.json") as f:
+        home_dir = os.path.expanduser('~')
+        Path(f"{home_dir}/.spekter/").mkdir(parents=True, exist_ok=True)
+        with open(f"{home_dir}/.spekter/data.json") as f:
             SAVES = json.load(f)
     except:
         SAVES = dict()

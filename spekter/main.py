@@ -24,7 +24,9 @@ def init():
     SAVES["location"] = location
     SAVES["last_checked"] = datetime.datetime.now().timestamp()
     SAVES["files"] = []
-    with open("data.json", "w") as f:
+    home_dir = os.path.expanduser('~')
+    Path(f"{home_dir}/.spekter/").mkdir(parents=True, exist_ok=True)
+    with open(f"{home_dir}/.spekter/data.json", "w") as f:
         json.dump(SAVES, f)
 
 @click.command()
